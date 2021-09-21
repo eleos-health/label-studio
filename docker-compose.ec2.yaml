@@ -19,6 +19,7 @@ services:
       - ./mydata:/label-studio/data:rw
       - ./deploy/nginx/${NGINX_FILE:-default.conf}:/etc/nginx/conf.d/default.conf:ro
     command: nginx -g "daemon off;"
+    restart: always
 
   app:
     stdin_open: true
@@ -43,6 +44,7 @@ services:
         type: volume
         volume:
           nocopy: true
+    restart: always
 
 volumes:
   static: {} 
