@@ -5,8 +5,8 @@ services:
   nginx:
     image: nginx:1.20.1
     ports:
-      - "80"
-      - "443"
+      - "80:80"
+      - "443:443"
     depends_on:
       - app
     volumes:
@@ -34,8 +34,11 @@ services:
       - POSTGRE_PASSWORD
       - POSTGRE_PORT=5432
       - POSTGRE_HOST
-      - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
+      - LABEL_STUDIO_HOST=
       - LABEL_STUDIO_COPY_STATIC_DATA=true
+      - LABEL_STUDIO_DISABLE_SIGNUP_WITHOUT_LINK
+      - LABEL_STUDIO_USERNAME
+      - LABEL_STUDIO_PASSWORD
     volumes:
       - ./mydata:/label-studio/data:rw
       # keep in sync with deploy/docker-entrypoint.d/30-copy-static-data.sh
